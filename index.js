@@ -82,6 +82,7 @@ function showPosition (position, error) {
 		dataType: "text",
 		success:function(data) {
 			var json = $.parseJSON(data);
+			$('#js-search-results').addClass("sunrise");
 			$('#js-search-results').html('The sunrise will occur at <br> ' + toLocalTime(json.results.sunrise));
 		}
 	});
