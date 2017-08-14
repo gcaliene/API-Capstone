@@ -3,44 +3,61 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Sunset App - AJAX</title>
-	 <script
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script
           src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
           crossorigin="anonymous">
  	 </script>
- 	 	
-    <link href="style.css" rel="stylesheet" type="text/css" />
+ 	 <link rel="stylesheet" type="text/css" href="float-grid.css">
+     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Kaushan+Script|Permanent+Marker|Righteous" rel="stylesheet">
 </head>
 
 
 
-<body>
+<body class="background-color">
 
-	<section class="centralHeading">
-		<h2 class="title">When is sunset?</h2>
-		<h4 class="subheading">Find out </h4>	
-	</section>
+	
+	<header>
+		<section class="centralHeading">
+			<h1 class="title">
+				<div class="homePage"> <span class="welcome">Welcome, early riser!.</span> </br> 
+				<span class="subheading">Know when sunrise happens... before sunrise!</span> <br><br> 
+				<button type="submit" value="Submit" id="begin" class="myButton">Let's Begin</button> 
+				</div>
+			</h1>
+				
+		</section>
+	</header>
 
+	
 
 	<main>
-		<h6>This is your current location <span id="current"> </span></h6>
-		<h5> If not, please enter your location below </h5>
-			<form  class="js-search-form" >
+		<h3> <span id="current"> </span></h3>
+		<div id="mapholder"></div>
+		<h5 class="hidden js-search-form"> If not, please enter your location below </h5>
+			<form  class="hidden js-search-form" >
 				<label for='query'></label>
-				<input type="text" name="latitude" id='latitude'> Latitude </br>
-				<input type="text" name="longitude" id='longitude'> Longitude<br>
+				<input type="text" name="latitude" id='latitude' placeholder="Latitude"></br>
+				<input type="text" name="longitude" id='longitude' placeholder="Longitude"></br>
 				<input type="date" name="date"><br>
 				<button type="submit" value="Submit" id="Submit">Submit</button> 
 			</form>
 
-		 <h2>Results</h2>
+	
          	
          <div id="js-search-results">
-
+			
          </div>
 
 	</main>
 	<script src="index.js"></script>
+	<script src="moment.js"></script>
+	<script src="moment-timezone-with-data.js"></script>
+	<script src="moment-timezone-with-data-2012-2022.js"></script>
+	 
+
+
 </body>
 
 
