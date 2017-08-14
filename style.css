@@ -8,7 +8,7 @@
 /*found on https://stackoverflow.com/questions/6970082/my-css-gradient-doesnt-stretch-it-repeats*/
 /*If you want the gradient to stretch the entire height of the page:*/
 html {
-	
+	font-size: 16px;
 	min-height: 100%;
 }
 
@@ -29,6 +29,7 @@ header, body {
 	margin: 0;
     height: 100%;
     width: 100%;
+    font-size: 120%;
 }
 
 
@@ -88,6 +89,7 @@ header, body {
 	-webkit-border-radius: 5px;	
 	font-size:x-large;
 	vertical-align: middle;
+	font-size:130%;
 }
 
 	/*font-family: 'Permanent Marker', cursive;
