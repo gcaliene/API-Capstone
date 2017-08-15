@@ -6,7 +6,7 @@
 
 /* Portrait and Landscape */
 @media only screen 
-  and (min-device-width: 320px) 
+  and (min-device-width: 200px) 
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
 html{font-size: 180%;} 
@@ -14,7 +14,7 @@ html{font-size: 180%;}
 
 /* Portrait */
 @media only screen 
-  and (min-device-width: 320px) 
+  and (min-device-width: 200px) 
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
@@ -23,7 +23,7 @@ html{font-size: 180%;}
 
 /* Landscape */
 @media only screen 
-  and (min-device-width: 320px) 
+  and (min-device-width: 200px) 
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
