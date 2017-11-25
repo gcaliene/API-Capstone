@@ -3,21 +3,54 @@ var BTN = document.getElementById("Submit");
 var RESULTS = document.getElementById("js-search-results");
 var x = document.getElementById('current');
 
+function getCoordinatesAndRenderSunriseTime () {
+	$.ajax({
+		url: "http://ip-api.com/json",
+		dataType: 'text',
+		success: function(jsonString){
+			// console.log(jsonString);
+			var jsonObject = $.parseJSON(jsonString); // this is needed to access the data. Remember we need an object not strings
+			// console.log(jsonObject.lon);
+			// console.log(jsonObject.lat);
+			// console.log(x);
+			x.innerHTML = "<h2>Results</h2>" + "Your geographic coordinate system is:"+ "<br>Latitude: " + jsonObject.lat + "<br>Longitude: " + jsonObject.lon;
+			getSunriseTime(jsonObject);
+		}
+	})
+};
+
+function getSunriseTime(jsonObject) {
+	$.ajax({
+		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.lat + '&lng='+  jsonObject.lon +'&date=today',
+		dataType: "text",
+		success:function(dataString) {
+			var json = $.parseJSON(dataString);
+			$('#js-search-results').addClass("sunrise");
+			$('#js-search-results').html('The sunrise will occur at <br> ' + toLocalTime(json.results.sunrise));
+		}
+	})
+};
+
+window.onload = getCoordinatesAndRenderSunriseTime();
 
 
-//this part of the code obtains the current geolocation of the individual
-function getLocation(){
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition, showError);
-	} else {
-		console.log("user denied");
-		x.innerHTML = "Geolocation is not supported by this browser.";
-		$(".js-search-form").removeClass("hidden");
-	}
-}
 
-//On home page there will be the small heading and the button to begin the callback.
-$("#begin").click(getLocation);
+
+
+//
+// //this part of the code obtains the current geolocation of the individual
+// function getLocation(){
+// 	if (navigator.geolocation) {
+// 		navigator.geolocation.getCurrentPosition(showPosition, showError);
+// 	} else {
+// 		console.log("user denied");
+// 		x.innerHTML = "Geolocation is not supported by this browser.";
+// 		$(".js-search-form").removeClass("hidden");
+// 	}
+// }
+//
+// //On home page there will be the small heading and the button to begin the callback.
+// $("#begin").click(getLocation);
 
 
 
