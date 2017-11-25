@@ -9,43 +9,76 @@ function getCoordinatesAndRenderSunriseTime () {
 		url: "http://ip-api.com/json",
 		dataType: 'text',
 		success: function(jsonString){
-			// console.log(jsonString);
-			var jsonObject = $.parseJSON(jsonString); // this is needed to access the data. Remember we need an object not strings
-			// console.log(jsonObject.lon);
-			// console.log(jsonObject.lat);
-			// console.log(x);
-			x.innerHTML = "<h2>Results</h2>" + "Your geographic coordinate system is:"+ "<br>Latitude: " + jsonObject.lat + "<br>Longitude: " + jsonObject.lon;
+			let jsonObject = $.parseJSON(jsonString); // this is needed to access the data. Remember we need an object not strings
 			getNextSunriseTime(jsonObject);
-			// getSunriseTimeTomorrow(jsonObject);
+			// getReverseGeocode(jsonObject.lat, jsonObject.lon);
 		}
 	})
 };
 
+function getReverseGeocode(lat, long){
+	$.ajax({
+		url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyAU9ukLeu5nPJ2iRGqkQsY0uhLZq1nDkd4`,
+		dataType: 'text',
+		success: function (jsonString){
+			let jsonObject = $.parseJSON(jsonString);
+			var location = jsonObject.results[1].formatted_address;
+			// console.log(location);
+			// console.log(location);
+			$('#demo2').html(location);
+		}
+	})
+};
+
+//https://momentjs.com/docs/#/parsing/string-format/
 function getNextSunriseTime(jsonObject) {
 	$.ajax({
-		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.lat + '&lng='+  jsonObject.lon +'&date=today&formatted=0',
+		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.lat + '&lng='+  jsonObject.lon +'&date=today&formatted=0', //make sure it is not formatted
 		dataType: "text",
 		success:function(dataString) {
-		//	console.log(dataString);
 			var json = $.parseJSON(dataString);
-			console.log(json.results);
-			// console.log(json);
-			var localTime = moment(json.results.sunrise).utc().local().calendar();
-			// var localTime = moment(json.results.sunrise).utc().local().format('MMMM Do YYYY, h:mm:ss a')
-
-			var countDownTime = moment(json.results.sunrise, "h:mm:ss a");
-			// console.log(moment().startOf(countDownTime).fromNow());
-			// console.log(countDownTime);
+			// console.log(json.results);
+			var sunriseLocalTime = moment(json.results.sunrise).utc().local().calendar();
 			$('#js-search-results').addClass("sunrise");
       // insert code here delete a future class of sunset, they will be interchangeable
-			$('#js-search-results').html('The next sunrise will occur at <br> ' + localTime);
-			// getCountDown(countDownTime);
+console.log(getReverseGeocode(jsonObject.lat, jsonObject.lon));
+			$('#js-search-results').html(`The next sunrise will occur  ${sunriseLocalTime} in`);
+			getCountDown(json.results.sunrise);
 		}
 	})
 };
 
+////https://www.w3schools.com/howto/howto_js_countdown.asp for reference
+function getCountDown (countdownTime){
+	var formattedCountdownTime = moment(countdownTime).format('MMM D, YYYY, HH:mm:ss');
+	// console.log(formattedCountdownTime);
+	var countDownDate = new Date(formattedCountdownTime).getTime();
+	// console.log(countDownDate);
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+		// Get todays date and time
+	var now = new Date().getTime();
+		// console.log(now);
+		// Find the distance between now an the count down date
+		var distance = countDownDate - now;
+		// Time calculations for days, hours, minutes and seconds
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		// Display the result in the element with id="demo"
+		document.getElementById("demo").innerHTML ="The next sunrise will be in " + hours + "h "
+		+ minutes + "m " + seconds + "s.";
+		// If the count down is finished, write some text
+		if (distance < 0) {
+			clearInterval(x);
+			document.getElementById("demo").innerHTML = "EXPIRED";
+		}
+	}, 100);
+};
 
 
+//AIzaSyAU9ukLeu5nPJ2iRGqkQsY0uhLZq1nDkd4
+// //https://momentjs.com/docs/#/parsing/string-format/
 // function getSunriseTimeTomorrow(jsonObject) {
 // 	var tomorrow = moment().add(1, 'days').calendar();
 // 	console.log(tomorrow);
@@ -71,78 +104,10 @@ function getNextSunriseTime(jsonObject) {
 
 
 
-// //
-// function getCountDown (countDownTime){
-// 	// Update the count down every 1 second
-// 	var x = setInterval(function() {
-//
-// 		// Get todays date and time
-// 		var now = moment().format('h:mm:ss a');
-// 		console.log(now);
-//
-// 		// Find the distance between now an the count down date
-// 		var distance = countDownTime - now;
-//
-// 		// Time calculations for days, hours, minutes and seconds
-// 		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-// 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-// 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-//
-// 		// Display the result in the element with id="demo"
-// 		document.getElementById("demo").innerHTML = hours + "h "
-// 		+ minutes + "m " + seconds + "s ";
-//
-// 		// If the count down is finished, write some text
-// 		if (distance < 0) {
-// 			clearInterval(x);
-// 			document.getElementById("demo").innerHTML = "EXPIRED";
-// 		}
-// 	}, 1000);
-// }
 
-//need to set up a countdowntimer til sunset/sunrise time
 
-// Set the date we're counting down to
-// var countDownDate = new Date("Jan 5, 2018 15:37:25").getTime();
-//
-// // Update the count down every 1 second
-// var x = setInterval(function() {
-//
-// 	// Get todays date and time
-// 	var now = new Date().getTime();
-//
-// 	// Find the distance between now an the count down date
-// 	var distance = countDownDate - now;
-//
-// 	// Time calculations for days, hours, minutes and seconds
-// 	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-// 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-// 	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-// 	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-//
-// 	// Display the result in the element with id="demo"
-// 	document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-// 	+ minutes + "m " + seconds + "s ";
-//
-// 	// If the count down is finished, write some text
-// 	if (distance < 0) {
-// 		clearInterval(x);
-// 		document.getElementById("demo").innerHTML = "EXPIRED";
-// 	}
-// }, 1000);
 
 window.onload = getCoordinatesAndRenderSunriseTime();
-
-
-
-
-//The next thing I would have to do is the conversion of the time to the local time.
-function toLocalTime(UTCDateString){
-    var CLT = new moment.utc(UTCDateString, 'hh:mm:ss a');
-    var newDate = CLT.clone().local().format("h:mm:ss A");
-    console.log(newDate);
-	return newDate;
-}
 
 
 //ERROR Handler

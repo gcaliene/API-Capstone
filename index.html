@@ -3,13 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Sunrise App - AJAX</title>
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href="css/float-grid.css"rel="stylesheet" type="text/css" >
-	<link href="css/media.css"rel="stylesheet" type="text/css" >
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<!-- <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+	<!-- <link href="css/float-grid.css"rel="stylesheet" type="text/css" >
+	<link href="css/media.css"rel="stylesheet" type="text/css" > -->
 	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Kaushan+Script|Permanent+Marker|Righteous" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js">
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
 	<script
 					src="https://code.jquery.com/jquery-3.2.1.min.js"
 					integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -21,7 +20,6 @@
 
 
 <body class="background-color">
-
 
 	<header>
 		<section class="centralHeading col-3 col-4 col-6 col-12 ">
@@ -35,35 +33,25 @@
 		</section>
 	</header>
 
-
 	<main>
-	<p id="demo"></p>
-
+		<p id="demo2"></p>
+		<p id="demo"></p>
 		<h3> <span id="current"> </span></h3>
 		<div id="mapholder"></div>
-		<h5 class="hidden js-search-form"></h5>
-			<!-- <form  class="hidden js-search-form" >
-				<label for='query'></label>
-				<input type="text" name="latitude" id='latitude' placeholder="Latitude"></br>
-				<input type="text" name="longitude" id='longitude' placeholder="Longitude"></br>
-				<input type="date" name="date"><br>
-				<button type="submit" value="Submit" id="Submit">Submit</button>
-			</form> -->
+		<h5 class="hidden js-search-form">	</h5>
+    <div id="js-search-results">
 
+    </div>
 
-
-         <div id="js-search-results">
-
-         </div>
-
+		<button type="button" class="sunset-hidden">Click Here For Sunset Times</button>
+		<button type="button" class="sunrise-hidden">Click Here For Sunrise Times</button>
 	</main>
-	<script src="index.js"></script>
-	<script src="moment.js"></script>
-	<script src="moment-timezone-with-data.js"></script>
-	<script src="moment-timezone-with-data-2012-2022.js"></script>
 
 
-
+ <script src="index.js"></script>
+	<!-- <script src="moment.js"></script> -->
+	<!-- <script src="moment-timezone-with-data.js"></script> -->
+	<!-- <script src="moment-timezone-with-data-2012-2022.js"></script> -->
 </body>
 
 
