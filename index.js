@@ -1,36 +1,122 @@
+//https://www.w3schools.com/html/html5_geolocation.asp & http://ip-api.com/docs/api:json https://freegeoip.net for reference
+//https://www.w3schools.com/howto/howto_js_countdown.asp
 var BTN = document.getElementById("Submit");
 var RESULTS = document.getElementById("js-search-results");
 var x = document.getElementById('current');
 
+function getCoordinatesAndRenderSunriseTime () {
+	$.ajax({
+		url: "http://ip-api.com/json",
+		dataType: 'text',
+		success: function(jsonString){
+			let jsonObject = $.parseJSON(jsonString); // this is needed to access the data. Remember we need an object not strings
+			getReverseGeocode(jsonObject.lat, jsonObject.lon);
+			getNextSunriseTime(jsonObject);
+			if (document.getElementById("timer").innerHTML === ""){
+				getTomorrowSunriseTime(jsonObject);
+			}
+		}
+	})
+	$("#js-sunset-hidden").on("click", function() {
+		$("#js-sunset-hidden").addClass("hidden");
+		$("#js-sunrise-hidden").removeClass("hidden");
+
+	})
+	$("#js-sunrise-hidden").on("click", function() {
+		$("#js-sunrise-hidden").addClass("hidden");
+		$("#js-sunset-hidden").removeClass("hidden");
+	})
+};
+
+function getReverseGeocode(lat, long){
+	$.ajax({
+		url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyAU9ukLeu5nPJ2iRGqkQsY0uhLZq1nDkd4`,
+		dataType: 'text',
+		success: function (jsonString){
+			let jsonObject = $.parseJSON(jsonString);
+			var location = jsonObject.results[1].formatted_address;
+			// console.log(location);
+			// console.log(location);
+			$('#demo2').html(location);
+		}
+	})
+};
+
+//https://momentjs.com/docs/#/parsing/string-format/
+function getNextSunriseTime(jsonObject) {
+	$.ajax({
+		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.lat + '&lng='+  jsonObject.lon +'&date=today&formatted=0', //make sure it is not formatted
+		dataType: "text",
+		success:function(dataString) {
+			var json = $.parseJSON(dataString);
+			// console.log(json.results);
+			var sunriseLocalTime = moment(json.results.sunrise).utc().local().calendar();
+			// $('#js-search-results').addClass("sunrise");
+      // insert code here delete a future class of sunset, they will be interchangeable
+
+			$('#js-search-results').html(`Sunrise will occur  ${sunriseLocalTime}`);
+			getCountDown(json.results.sunrise);
+			console.log(sunriseLocalTime);
+
+		}
+	})
+};
+function getTomorrowSunriseTime(jsonObject) {
+	$.ajax({
+		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.lat + '&lng='+  jsonObject.lon +'&date=tomorrow&formatted=0', //make sure it is not formatted
+		dataType: "text",
+		success:function(dataString) {
+			var json = $.parseJSON(dataString);
+
+			// console.log(json.results);
+			var sunriseLocalTime = moment(json.results.sunrise).utc().local().calendar();
+			// $('#js-search-results').addClass("sunrise");
+      // insert code here delete a future class of sunset, they will be interchangeable
+
+			$('#js-search-results').html(`Sunrise will occur  ${sunriseLocalTime}`);
+			getCountDown(json.results.sunrise);
+			console.log(sunriseLocalTime);
+
+		}
+	})
+};
+
+////https://www.w3schools.com/howto/howto_js_countdown.asp for reference
+function getCountDown (countdownTime){
+	var formattedCountdownTime = moment(countdownTime).format('MMM D, YYYY, HH:mm:ss');
+	// console.log(formattedCountdownTime);
+	var countDownDate = new Date(formattedCountdownTime).getTime();
+	// console.log(countDownDate);
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+		// Get todays date and time
+	var now = new Date().getTime();
+		// console.log(now);
+		// Find the distance between now an the count down date
+		var distance = countDownDate - now;
+		// Time calculations for days, hours, minutes and seconds
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		// Display the result in the element with id="demo"
+		document.getElementById("timer").innerHTML ="The next sunrise will be in </br>" + hours + "h "
+		+ minutes + "m " + seconds + "s.";
+		// If the count down is finished, write some text
+		if (distance < 0) {
+			//then get tomorrows sunrise
+
+			clearInterval(x);
+			document.getElementById("timer").innerHTML = "";
+		}
+	}, 100)
+	$("#sunrise-left").fadeIn(2500);
+};
 
 
-//this part of the code obtains the current geolocation of the individual 
-function getLocation(){
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition, showError);
-	} else {
-		console.log("user denied");
-		x.innerHTML = "Geolocation is not supported by this browser.";
-		$(".js-search-form").removeClass("hidden");
-	}
-}
+window.onload = getCoordinatesAndRenderSunriseTime();
 
 
-
-//On home page there will be the small heading and the button to begin.
-$("#begin").click(function () {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition, showError);
-		$(".centralHeading").addClass("hidden");
-	} else {
-		console.log("user denied");
-		x.innerHTML = "Geolocation is not supported by this browser.";
-		$(".js-search-form").removeClass("hidden");
-	}	
-});
-
-
-//in case of errors.
+//ERROR Handler
 function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
@@ -46,31 +132,4 @@ function showError(error) {
             x.innerHTML = "An unknown error occurred."
             break;
     }
-}	
-
-
-//This part will display in the HTML the current Latitude and Longitude as well as make the AJAX call to the API and returns the time of the sunrise.
-function showPosition (position, error) {
-	x.innerHTML = "<h2>Results</h2>" + "Your geographic coordinate system is:"+ "<br>Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-	$.ajax({
-		url: 'https://api.sunrise-sunset.org/json?lat='+ position.coords.latitude + '&lng='+ position.coords.longitude +'&date=today',
-		dataType: "text",
-		success:function(data) {
-			var json = $.parseJSON(data);
-			$('#js-search-results').addClass("sunrise");
-			$('#js-search-results').html('The sunrise will occur at <br> ' + toLocalTime(json.results.sunrise));
-		}
-	});
 }
-
-//The next thing I would have to do is the conversion of the time to the local time. 
-function toLocalTime(UTCDateString){
-    var CLT = new moment.utc(UTCDateString, 'hh:mm:ss a');
-    var newDate = CLT.clone().local().format("h:mm:ss A"); 
-    console.log(newDate);
-	return newDate; 
-}
-
-
-
-
