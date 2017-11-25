@@ -3,15 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Sunrise App - AJAX</title>
-	<!-- <link href="style.css" rel="stylesheet" type="text/css" /> -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/float-grid.css"rel="stylesheet" type="text/css" >
+	<link href="css/media.css"rel="stylesheet" type="text/css" >
+	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Kaushan+Script|Permanent+Marker|Righteous" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js">
+
+</script>
 	<script
-          src="https://code.jquery.com/jquery-3.2.1.min.js"
-          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-          crossorigin="anonymous">
- 	 </script>
- 	 <!-- <link rel="stylesheet" type="text/css" href="float-grid.css">
- 	 <link rel="stylesheet" type="text/css" href="media.css"> -->
-     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Kaushan+Script|Permanent+Marker|Righteous" rel="stylesheet">
+					src="https://code.jquery.com/jquery-3.2.1.min.js"
+					integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+					crossorigin="anonymous">
+	 </script>
+
 </head>
 
 
@@ -24,7 +28,7 @@
 			<h1 class="title">
 				<div class="homePage"> <span class="welcome">Welcome, early riser!.</span> </br>
 				<span class="subheading">Know when sunrise happens... before sunrise!</span> <br><br>
-				<button type="submit" value="Submit" id="begin" class="myButton">Let's Begin</button>
+				<!-- <button type="submit" value="Submit" id="begin" class="myButton">Let's Begin</button> -->
 				</div>
 			</h1>
 
@@ -32,8 +36,9 @@
 	</header>
 
 
-
 	<main>
+	<p id="demo"></p>
+
 		<h3> <span id="current"> </span></h3>
 		<div id="mapholder"></div>
 		<h5 class="hidden js-search-form"></h5>
@@ -60,6 +65,7 @@
 
 
 </body>
+
 
 
 </html>
