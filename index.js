@@ -11,7 +11,7 @@ function getCoordinatesAndRenderSunriseTime () {
 		success: function(jsonString){
 			let jsonObject = $.parseJSON(jsonString); // this is needed to access the data. Remember we need an object not strings
 			console.log(jsonObject.latitude);
-			getReverseGeocode(jsonObject.latitude, jsonObject.longitude);
+			// getReverseGeocode(jsonObject.latitude, jsonObject.longitude);
 			getNextSunriseTime(jsonObject);
 			if (document.getElementById("timer").innerHTML === ""){
 				getTomorrowSunriseTime(jsonObject);
@@ -74,10 +74,9 @@ function getTomorrowSunriseTime(jsonObject) {
 			// $('#js-search-results').addClass("sunrise");
       // insert code here delete a future class of sunset, they will be interchangeable
 
-			$('#js-search-results').html(`Sunrise will occur  ${sunriseLocalTime}`);
+			$('#js-search-results').html(`Sunrise will occur <br> ${sunriseLocalTime}`);
 			getCountDown(json.results.sunrise);
 			console.log(sunriseLocalTime);
-
 		}
 	})
 };
@@ -100,8 +99,8 @@ function getCountDown (countdownTime){
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		// Display the result in the element with id="demo"
-		document.getElementById("timer").innerHTML ="The next sunrise will be in </br>" + hours + "h "
-		+ minutes + "m " + seconds + "s.";
+		document.getElementById("timer").innerHTML = hours + "h "
+		+ minutes + "m " + seconds + "s";
 		// If the count down is finished, write some text
 		if (distance < 0) {
 			//then get tomorrows sunrise

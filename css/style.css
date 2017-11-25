@@ -12,6 +12,9 @@ html {
 	min-height: 100%;
 }
 
+.background-color{
+	background-color: hsla(240, 100%, 30%, 0.3);
+}
 /* this is from https://www.w3schools.com/css/css3_gradients.asp */
 /*video {
 	background-size: cover;
@@ -31,25 +34,57 @@ html {
   width: auto;
   height: auto;
   z-index: -100;
+
 }
 
-.header-and-main{
-	background-color: rgba(255, 0, 0, 0.1);
+/*.header-and-main{
+	background-color: hsla(200, 200%, 20%, 0.3);
 
 	text-align: center;
 	color: black;
-	margin-top:20%;
-	margin-left: 25%;
+	/*margin-top:20%;*/
+	/*margin-left: 25%;
 	margin-right: 25%;
+}*/
 
+@media screen and (orientation: portrait),
+{
+	.header-and-main{
+		/*background-color: hsla(200, 100%, 30%, 0.3);*/
 
+		text-align: center;
+		color: black;
+		margin-top:20%;
+		margin-left: 0%;
+		margin-right: 0%;
+		font-size: 250%;
+		text-outline: 2px 2px #FFFFFF;
+
+	}
 }
+@media screen and (orientation: landscape),
+{
+	.header-and-main{
+		min-height: 100%;
+		text-align: center;
+		color: black;
+
+		margin-left: 0%;
+		margin-right: 0%;
+		font-size: 200%;
+		text-outline: 2px 2px #FFFFFF;
+
+	}
+}
+
 
 header, body {
+	margin: 0;
+	height: 100%;
+  font-size: 150%;
+	-webkit-text-stroke: .3px white;
 
-
-    font-size: 150%;
-}
+ -webkit-text-fill-color: black;}
 
 
 
