@@ -6,11 +6,12 @@ var x = document.getElementById('current');
 
 function getCoordinatesAndRenderSunriseTime () {
 	$.ajax({
-		url: "http://ip-api.com/json",
+		url: "https://freegeoip.net/json/",
 		dataType: 'text',
 		success: function(jsonString){
 			let jsonObject = $.parseJSON(jsonString); // this is needed to access the data. Remember we need an object not strings
-			getReverseGeocode(jsonObject.lat, jsonObject.lon);
+			console.log(jsonObject.latitude);
+			getReverseGeocode(jsonObject.latitude, jsonObject.longitude);
 			getNextSunriseTime(jsonObject);
 			if (document.getElementById("timer").innerHTML === ""){
 				getTomorrowSunriseTime(jsonObject);
@@ -45,7 +46,7 @@ function getReverseGeocode(lat, long){
 //https://momentjs.com/docs/#/parsing/string-format/
 function getNextSunriseTime(jsonObject) {
 	$.ajax({
-		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.lat + '&lng='+  jsonObject.lon +'&date=today&formatted=0', //make sure it is not formatted
+		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.latitude + '&lng='+  jsonObject.longitude +'&date=today&formatted=0', //make sure it is not formatted
 		dataType: "text",
 		success:function(dataString) {
 			var json = $.parseJSON(dataString);
@@ -63,7 +64,7 @@ function getNextSunriseTime(jsonObject) {
 };
 function getTomorrowSunriseTime(jsonObject) {
 	$.ajax({
-		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.lat + '&lng='+  jsonObject.lon +'&date=tomorrow&formatted=0', //make sure it is not formatted
+		url: 'https://api.sunrise-sunset.org/json?lat='+ jsonObject.latitude + '&lng='+  jsonObject.longitude +'&date=tomorrow&formatted=0', //make sure it is not formatted
 		dataType: "text",
 		success:function(dataString) {
 			var json = $.parseJSON(dataString);
