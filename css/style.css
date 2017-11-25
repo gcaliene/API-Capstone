@@ -13,34 +13,53 @@ html {
 }
 
 /* this is from https://www.w3schools.com/css/css3_gradients.asp */
-.background-color {
+/*video {
 	background-size: cover;
 	background-repeat: no-repeat;
-	background: orange;
-	background: -webkit-linear-gradient(blue,purple); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(blue,purple); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(blue,purple); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, purple, blue, orange); /* Standard syntax */
+	background: url('../assets/Sunrise.mp4') no-repeat;
+	z-index:-100;
+
+}*/
+/* The only rule that matters */
+#video-background {
+/*  making the video fullscreen  */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+}
+
+.header-and-main{
+	background-color: rgba(255, 0, 0, 0.1);
+
+	text-align: center;
+	color: black;
+	margin-top:20%;
+	margin-left: 25%;
+	margin-right: 25%;
+
+
 }
 
 header, body {
-	text-align: center;
-	color: white;
-	margin: 0;
-    height: 100%;
-    width: 100%;
-    font-size: 120%;
+
+
+    font-size: 150%;
 }
 
 
 
 .welcome {
-	
+
 	font-family: 'Kaushan Script', cursive;
 
 }
 
-.myButton {
+/*.myButton {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c7456e), color-stop(1, #2a65bd));
 	background:-moz-linear-gradient(top, #c7456e 5%, #2a65bd 100%);
 	background:-webkit-linear-gradient(top, #c7456e 5%, #2a65bd 100%);
@@ -86,8 +105,8 @@ header, body {
 	font-weight: bold;
 	padding: 10px;
 	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;	
+	-webkit-border-radius: 5px;
 	font-size:x-large;
 	vertical-align: middle;
 	font-size:130%;
-}
+}*/
