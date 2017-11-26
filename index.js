@@ -120,7 +120,7 @@ function getCountDown (countdownTime){
 			clearInterval(x);
 			document.getElementById("timer").innerHTML = "Now";
 		}
-	}, 100)
+	}, 250)
 	$("#sunrise-left").fadeIn(2500);
 };
 
