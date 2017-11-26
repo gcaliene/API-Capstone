@@ -13,9 +13,9 @@ function getCoordinatesAndRenderSunriseTime () {
 			console.log(jsonObject.latitude);
 			// getReverseGeocode(jsonObject.latitude, jsonObject.longitude);
 			getNextSunriseTime(jsonObject);
-			if (document.getElementById("timer").innerHTML == "Now"){
-				getTomorrowSunriseTime(jsonObject);
-			}
+			// if (document.getElementById("timer").innerHTML == "Now"){
+			// 	getTomorrowSunriseTime(jsonObject);
+			// }
 			// else {
 			// 	getNextSunriseTime(jsonObject);
 			// }
@@ -58,13 +58,17 @@ function getNextSunriseTime(jsonObject) {
 			console.log(new Date(json.results.sunrise).getTime());
 			console.log(new Date().getTime());
 
-			var sunriseLocalTime = moment(json.results.sunrise).utc().local().calendar();
-			// $('#js-search-results').addClass("sunrise");
-      // insert code here delete a future class of sunset, they will be interchangeable
+			if (new Date(json.results.sunrise).getTime() > new Date().getTime()){
+				var sunriseLocalTime = moment(json.results.sunrise).utc().local().calendar();
+				// $('#js-search-results').addClass("sunrise");
+				// insert code here delete a future class of sunset, they will be interchangeable
+				$('#js-search-results').html(`Sunrise will occur  ${sunriseLocalTime}`);
+				getCountDown(json.results.sunrise);
+				console.log(sunriseLocalTime);
+			} else {
+				getTomorrowSunriseTime(jsonObject);
+			}
 
-			$('#js-search-results').html(`Sunrise will occur  ${sunriseLocalTime}`);
-			getCountDown(json.results.sunrise);
-			console.log(sunriseLocalTime);
 
 		}
 	})
