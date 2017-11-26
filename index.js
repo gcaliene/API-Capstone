@@ -13,7 +13,7 @@ function getCoordinatesAndRenderSunriseTime () {
 			console.log(jsonObject.latitude);
 			// getReverseGeocode(jsonObject.latitude, jsonObject.longitude);
 			getNextSunriseTime(jsonObject);
-			if (document.getElementById("timer").innerHTML === ""){
+			if (document.getElementById("timer").innerHTML !== ""){
 				getTomorrowSunriseTime(jsonObject);
 			}
 		}
@@ -108,7 +108,7 @@ function getCountDown (countdownTime){
 			clearInterval(x);
 			document.getElementById("timer").innerHTML = "";
 		}
-	}, 100)
+	}, 1000)
 	$("#sunrise-left").fadeIn(2500);
 };
 
