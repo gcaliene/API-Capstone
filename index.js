@@ -13,7 +13,7 @@ function getCoordinatesAndRenderSunriseTime () {
 			console.log(jsonObject.latitude);
 			// getReverseGeocode(jsonObject.latitude, jsonObject.longitude);
 			getNextSunriseTime(jsonObject);
-			if (document.getElementById("timer").innerHTML === "Now"){
+			if (document.getElementById("timer").innerHTML == "Now"){
 				getTomorrowSunriseTime(jsonObject);
 			}
 			// else {
@@ -54,7 +54,10 @@ function getNextSunriseTime(jsonObject) {
 		success:function(dataString) {
 			console.log('getNextSunriseTime ran');
 			var json = $.parseJSON(dataString);
-			// console.log(json.results);
+			console.log(json.results.sunrise);
+			console.log(new Date(json.results.sunrise).getTime());
+			console.log(new Date().getTime());
+
 			var sunriseLocalTime = moment(json.results.sunrise).utc().local().calendar();
 			// $('#js-search-results').addClass("sunrise");
       // insert code here delete a future class of sunset, they will be interchangeable
