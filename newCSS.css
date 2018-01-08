@@ -29,9 +29,13 @@ a {
 	vertical-align: middle;
 }
 
+.header_content_list {
+	padding: 0px;
+}
+
 .header_content_list li {
 	display: inline;
-	padding: 15px;
+	padding-left: 0px;
 }
 
 #myVideo {
