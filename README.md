@@ -1,4 +1,4 @@
-# API-Capstone
+# Sunrise Countdown
 
 Welcome to my Sunrise App.
 https://gcaliene.github.io/Thinkful-Sunrise-App-Capstone/
