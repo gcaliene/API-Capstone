@@ -14,7 +14,7 @@ https://github.com/gcaliene/API-Capstone/blob/master/Full-sized%20window%20captu
 #
 #
 
-# Old screenshots
+## Old screenshots
 https://github.com/gcaliene/API-Capstone/blob/master/Screen%20Shot%202017-08-14%20at%2011.04.28%20PM.png
 https://github.com/gcaliene/API-Capstone/blob/master/Screen%20Shot%202017-08-14%20at%2011.04.36%20PM.png
 https://github.com/gcaliene/API-Capstone/blob/master/Screen%20Shot%202017-08-14%20at%2011.04.49%20PM.png
