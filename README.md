@@ -1,7 +1,7 @@
 # Sunrise Countdown
 
 Welcome to my Sunrise App.
-https://gcaliene.github.io/Thinkful-Sunrise-App-Capstone/
+https://gcaliene.github.io/Sunrise-Countdown-Project/
 
 There are many sunrise apps out there but many require more input than a push of a button.
 
