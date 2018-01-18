@@ -11,9 +11,10 @@ This app was used using CSS media queries, moment.js, jQuery, AJAX/JSON, and HTM
 https://github.com/gcaliene/API-Capstone/blob/master/Chrome%20dev%20tools%20media-query.PNG
 https://github.com/gcaliene/API-Capstone/blob/master/Full-sized%20window%20capture.PNG
 
+#
+#
 
-
-#Old screenshots
+# Old screenshots
 https://github.com/gcaliene/API-Capstone/blob/master/Screen%20Shot%202017-08-14%20at%2011.04.28%20PM.png
 https://github.com/gcaliene/API-Capstone/blob/master/Screen%20Shot%202017-08-14%20at%2011.04.36%20PM.png
 https://github.com/gcaliene/API-Capstone/blob/master/Screen%20Shot%202017-08-14%20at%2011.04.49%20PM.png
