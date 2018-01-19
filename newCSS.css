@@ -1,88 +1,81 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	margin: 0;
-	font-family: "Archivo Black", sans-serif, Arial;
-	font-size: 17px;
+  margin: 0;
+  font-family: 'Archivo Black', sans-serif, Arial;
+  font-size: 17px;
 }
 
 a {
-	color: white;
+  color: white;
 }
 
 .header {
-	position: fixed;
-	/* background-color: #020212; */
-	z-index: 1000000;
-	position: fixed;
-	width: 100%;
-	height: 50px;
-	opacity: 0.8;
-	color: white;
+  position: fixed;
+  /* background-color: #020212; */
+  z-index: 1000000;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  opacity: 0.8;
+  color: white;
 }
 
 .header_content {
-	text-align: center;
-	/* margin: auto; */
-	vertical-align: middle;
+  text-align: center;
+  /* margin: auto; */
+  vertical-align: middle;
 }
 
 .header_content_list {
-	padding: 0px;
+  padding: 0px;
 }
 
 .header_content_list li {
-	display: inline;
-	padding-left: 0px;
+  display: inline;
+  padding-left: 0px;
 }
 
 #myVideo {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	min-width: 100%;
-	min-height: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .main {
-	position: fixed;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
-	color: #f1f1f1;
-	width: 100%;
-	height: 100vh;
-	padding: 20px;
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
 }
 
 .main_content {
-	position: relative;
-	margin-right: 15%;
-	margin-left: 15%;
-	margin-top: 20%;
+  position: relative;
+  margin-right: 15%;
+  margin-left: 15%;
+  margin-top: 25vh;
 }
 
 .main_content--centering {
-	text-align: center;
+  text-align: center;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
-/* Button  below */
-/* #myBtn {
-	width: 200px;
-	font-size: 18px;
-	padding: 10px;
-	border: none;
-	background: #000;
-	color: #fff;
-	cursor: pointer;
+@media only screen and (min-width: 2240px) {
+  h1 {
+    font-size: 5rem;
+  }
+  .main_content_text {
+    font-size: 2rem;
+  }
 }
-
-#myBtn:hover {
-	background: #ddd;
-	color: black;
-} */
