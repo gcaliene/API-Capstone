@@ -64,7 +64,8 @@ a {
   position: relative;
   margin-right: 15%;
   margin-left: 15%;
-  margin-top: 25vh;
+  /* margin-top: 25vh; */
+  margin-top: 25%;
 }
 
 .main_content--centering {

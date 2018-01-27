@@ -1,6 +1,6 @@
 //https://www.w3schools.com/html/html5_geolocation.asp & http://ip-api.com/docs/api:json https://freegeoip.net for reference
 //https://www.w3schools.com/howto/howto_js_countdown.asp
-var BTN = document.getElementById('Submit');
+// var BTN = document.getElementById('Submit');
 var RESULTS = document.getElementById('js-search-results');
 var x = document.getElementById('current');
 
@@ -13,15 +13,10 @@ function getCoordinatesAndRenderSunriseTime() {
       const jsonObject = $.parseJSON(jsonString); // this is needed to access the data. Remember we need an object not strings
       console.log(jsonObject.city);
       $('#city').html(jsonObject.city);
-      // console.log(jsonObject.latitude);
-      // getReverseGeocode(jsonObject.latitude, jsonObject.longitude); //not calling the reverseGeocoder at this moment
+      $('#city-sunset').html(jsonObject.city);
+
       getNextSunriseTime(jsonObject);
-      // if (document.getElementById("timer").innerHTML == "Now"){
-      // 	getTomorrowSunriseTime(jsonObject);
-      // }
-      // else {
-      // 	getNextSunriseTime(jsonObject);
-      // }
+      getNextSunsetTime(jsonObject);
     }
   });
   $('#js-sunset-hidden').on('click', function() {
@@ -69,14 +64,14 @@ function getNextSunriseTime(jsonObject) {
       // console.log(new Date().getTime());
 
       if (new Date(json.results.sunrise).getTime() > new Date().getTime()) {
-        var sunriseLocalTime = moment(json.results.sunrise)
+        const sunriseLocalTime = moment(json.results.sunrise)
           .utc()
           .local()
           .calendar();
         // const sunriseLocalTimeLowerCase = sunriseLocalTime.toLowerCase()
         // $('#js-search-results').addClass("sunrise");
         // insert code here delete a future class of sunset, they will be interchangeable
-        $('#js-search-results').html(`${sunriseLocalTime.toLowerCase()}.`);
+        $('#js-search-results').html(`${sunriseLocalTime}.`);
         getCountDown(json.results.sunrise);
         // console.log(sunriseLocalTime);
       } else {
@@ -85,6 +80,44 @@ function getNextSunriseTime(jsonObject) {
     }
   });
 }
+
+function getNextSunsetTime(jsonObject) {
+  $.ajax({
+    url:
+      'https://api.sunrise-sunset.org/json?lat=' +
+      jsonObject.latitude +
+      '&lng=' +
+      jsonObject.longitude +
+      '&date=today&formatted=0', //make sure it is not formatted
+    dataType: 'text',
+    success: function(dataString) {
+      // console.log("getNextSunriseTime ran");
+      var json = $.parseJSON(dataString);
+      // console.log(json.results.sunrise);
+      // console.log(new Date(json.results.sunrise).getTime());
+      // console.log(new Date().getTime());
+
+      if (new Date(json.results.sunset).getTime() > new Date().getTime()) {
+        const sunsetLocalTime = moment(json.results.sunset)
+          .utc()
+          .local()
+          .calendar();
+        // const sunriseLocalTimeLowerCase = sunriseLocalTime.toLowerCase()
+        // $('#js-search-results').addClass("sunrise");
+        // insert code here delete a future class of sunset, they will be interchangeable
+        $('#js-search-results-sunset').html(
+          `${sunsetLocalTime.toLowerCase()}.`
+        );
+
+        getSunsetCountDown(json.results.sunset);
+        // console.log(sunriseLocalTime);
+      } else {
+        getTomorrowSunsetTime(jsonObject);
+      }
+    }
+  });
+}
+
 function getTomorrowSunriseTime(jsonObject) {
   $.ajax({
     url:
@@ -96,18 +129,56 @@ function getTomorrowSunriseTime(jsonObject) {
     dataType: 'text',
     success: function(dataString) {
       // console.log('getTomorrowSunriseTime ran');
-      var json = $.parseJSON(dataString);
+      const json = $.parseJSON(dataString);
 
       // console.log(json.results);
-      var sunriseLocalTime = moment(json.results.sunrise)
+      const sunriseLocalTime = moment(json.results.sunrise)
+        .utc()
+        .local()
+        .calendar();
+      // const sunsetLocalTime = moment(json.results.sunset)
+      //   .utc()
+      //   .local()
+      //   .calendar();
+      // $('#js-search-results').addClass("sunrise");
+      // insert code here delete a future class of sunset, they will be interchangeable
+
+      $('#js-search-results').html(`${sunriseLocalTime}`);
+      // $('#js-search-results-sunset').html(`${sunsetLocalTime.toLowerCase()}.`);
+      getCountDown(json.results.sunrise);
+      // console.log(sunriseLocalTime);
+    }
+  });
+}
+
+function getTomorrowSunsetTime(jsonObject) {
+  $.ajax({
+    url:
+      'https://api.sunrise-sunset.org/json?lat=' +
+      jsonObject.latitude +
+      '&lng=' +
+      jsonObject.longitude +
+      '&date=tomorrow&formatted=0', //make sure it is not formatted
+    dataType: 'text',
+    success: function(dataString) {
+      // console.log('getTomorrowSunriseTime ran');
+      const json = $.parseJSON(dataString);
+
+      // console.log(json.results);
+      // const sunriseLocalTime = moment(json.results.sunrise)
+      //   .utc()
+      //   .local()
+      //   .calendar();
+      const sunsetLocalTime = moment(json.results.sunset)
         .utc()
         .local()
         .calendar();
       // $('#js-search-results').addClass("sunrise");
       // insert code here delete a future class of sunset, they will be interchangeable
 
-      $('#js-search-results').html(`${sunriseLocalTime.toLowerCase()}`);
-      getCountDown(json.results.sunrise);
+      // $('#js-search-results').html(`${sunriseLocalTime.toLowerCase()}`);
+      $('#js-search-results-sunset').html(`${sunsetLocalTime}.`);
+      getSunsetCountDown(json.results.sunrise);
       // console.log(sunriseLocalTime);
     }
   });
@@ -148,6 +219,42 @@ function getCountDown(countdownTime) {
   // $('#js-select-sunset-header-button').fadeIn(3500);
 
   $('#sunrise-left').fadeIn(3500);
+}
+
+function getSunsetCountDown(countdownTime) {
+  var formattedCountdownTime = moment(countdownTime).format(
+    'MMM D, YYYY, HH:mm:ss'
+  );
+  // console.log(formattedCountdownTime);
+  var countDownDate = new Date(formattedCountdownTime).getTime();
+  // console.log(countDownDate);
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+    // Get todays date and time
+    var now = new Date().getTime();
+    // console.log(now);
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+    // Time calculations for days, hours, minutes and seconds
+    var hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Display the result in the element with id="demo"
+    document.getElementById('timer-sunset').innerHTML =
+      hours + ' hours ' + minutes + ' minutes and ' + seconds + ' seconds';
+    // If the count down is finished, write some text
+    if (distance < 1) {
+      //then get tomorrows sunrise
+
+      clearInterval(x);
+      document.getElementById('timer-sunset').innerHTML = 'Now';
+    }
+  }, 250);
+  // $('#js-select-sunset-header-button').fadeIn(3500);
+
+  // $('#sun-left').fadeIn(3500);
 }
 
 window.onload = getCoordinatesAndRenderSunriseTime();
