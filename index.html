@@ -19,8 +19,9 @@
     <div class="header_content">
 
       <ul class="header_content_list">
-        <li class="header_content_list_item">  <button class="pulse">How about Sunset?</button>
-</li>
+        
+        <li class="header_content_list_item"><button id="js-select-sunset-header-button" class="pulse ">How about Sunset?</button></li>
+        <li class="header_content_list_item"><button id="js-select-sunrise-header-button" class="pulse hidden">Back to Sunrise?</button></li>
 
       </ul>
     </div>
@@ -33,20 +34,48 @@
 
   <div  class="main">
     <div class="main_content main_content--centering">
-      <h1 class="main_content_heading">Sunrise Countdown</h1>
       <div id="sunrise-left" class="main_content_text hidden">
-        <div>The next sunrise will happen in:</div>
+        <h1 class="main_content_heading">Sunrise Countdown</h1>
+        <div>The next sunrise in <span id="city"></span> will be <span id="js-search-results"></span></div>
         <div class="main_content_text_js">
-          <div id="timer"></div>
-          <div id="js-search-results"> </div>
+          <br>
+          <p>You have
+          <span id="timer"></span> to prepare.</p>
+
         </div>
-        <div id="timer"></div>
-        <div id="js-search-results"> </div>
+        <br>
+        <form action="">
+          <label>Want to plan ahead? Pick a date below.</label>
+          <input id="date" type="date">
+          <button class="pulse" type="submit" name="" value="Submit">GO!</button>
+        </form>
       </div>
-      <!-- <p>Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro.</p> -->
+      <!-- SUNSET BELOW !!! -->
+       <div id="sunset-left" class="main_content_text hidden">
+        <h1 class="main_content_heading">Sunset Countdown</h1>
+        <div>The next sunset in <span id="city"></span> will be <span id="js-search-results-sunset"></span></div>
+        <div class="main_content_text_js">
+          <br>
+          <p>You have
+          <span id="timer-sunset"></span> to prepare.</p>
+
+        </div>
+        <br>
+        <form action="">
+          <label>Want to plan ahead? Pick a date below.</label>
+          <input id="date-sunset" type="date">
+          <button class="pulse" type="submit" name="" value="Submit">GO!</button>
+        </form>
+      </div>
+
+
+      <!-- <p>Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro.</p>-->
     </div>
   </div>
   <script src="index.js"></script>
+  <script type="text/javascript" src="./js/header-button.js">
+
+  </script>
 
 </body>
 </html>
