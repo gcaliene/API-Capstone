@@ -48,9 +48,9 @@ $(document).ready(function() {
           .local()
           .calendar();
 
-        $('#js-search-results').fadeOut(1000, function() {
+        $('#js-search-results').fadeOut(500, function() {
           $('#js-search-results').html(`${sunriseLocalTime}.`);
-          $('#js-search-results').fadeIn(1000);
+          $('#js-search-results').fadeIn(500);
         });
 
         getCountDown(json.results.sunrise);
@@ -83,7 +83,7 @@ $(document).ready(function() {
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
       // Display the result in the element with id="demo"
-      $('#timer').fadeOut(1000, function() {
+      $('#timer').fadeOut(500, function() {
         $('#timer-date').html(
           days +
             ' days ' +
@@ -94,7 +94,7 @@ $(document).ready(function() {
             seconds +
             ' seconds'
         );
-        $('#timer-date').fadeIn(1000);
+        $('#timer-date').fadeIn(500);
       });
 
       if (distance < 1) {
