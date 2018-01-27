@@ -27,6 +27,14 @@ a {
   color: white;
 }
 
+.orange {
+  color: yellow;
+}
+
+.white {
+  color: lightblue;
+}
+
 .header_content {
   text-align: center;
   /* margin: auto; */
