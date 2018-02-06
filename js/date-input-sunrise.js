@@ -42,12 +42,14 @@ $(document).ready(function() {
       dataType: 'text',
       success: function(dataString) {
         var json = $.parseJSON(dataString);
-        console.log(dataString);
-        const sunriseLocalTime = moment(json.results.sunrise)
-          .utc()
-          .local()
-          .calendar();
-
+        console.log(json.results.sunrise);
+        const sunriseLocalTime = moment(json.results.sunrise).format(
+          'MMMM Do YYYY, h:mm:ss a'
+        );
+        // .utc()
+        // .local()
+        // .calendar();
+        console.log(sunriseLocalTime);
         $('#js-search-results').fadeOut(500, function() {
           $('#js-search-results').html(`${sunriseLocalTime}.`);
           $('#js-search-results').fadeIn(500);

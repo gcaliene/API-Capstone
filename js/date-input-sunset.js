@@ -41,10 +41,12 @@ $(document).ready(function() {
       dataType: 'text',
       success: function(dataString) {
         var json = $.parseJSON(dataString);
-        const sunriseLocalTime = moment(json.results.sunrise)
-          .utc()
-          .local()
-          .calendar();
+        const sunriseLocalTime = moment(json.results.sunrise).format(
+          'MMMM Do YYYY, h:mm:ss a'
+        );
+        // .utc()
+        // .local()
+        // .calendar();
 
         $('#js-search-results-sunset').fadeOut(500, function() {
           $('#js-search-results-sunset').html(`${sunriseLocalTime}.`);
@@ -97,53 +99,9 @@ $(document).ready(function() {
 
       if (distance < 1) {
         //then get tomorrows sunrise
-
         clearInterval(x);
-        // $('#timer-input').html('');
         document.getElementById('timer-sunset').innerHTML = 'Passed';
       }
     }, 250);
-
-    // $('#sunrise-left').fadeIn(2000);
   }
-
-  // function getSunsetCountDown(countdownTime) {
-  //   var formattedCountdownTime = moment(countdownTime).format(
-  //     'MMM D, YYYY, HH:mm:ss'
-  //   );
-  //   // console.log(formattedCountdownTime);
-  //   var countDownDate = new Date(formattedCountdownTime).getTime();
-  //   // console.log(countDownDate);
-  //   // Update the count down every 1 second
-  //   var x = setInterval(function() {
-  //     // Get todays date and time
-  //     var now = new Date().getTime();
-  //     // console.log(now);
-  //     // Find the distance between now an the count down date
-  //     var distance = countDownDate - now;
-  //     // Time calculations for days, hours, minutes and seconds
-  //     var hours = Math.floor(
-  //       (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //     );
-  //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  //     // Display the result in the element with id="demo"
-  //     $('#timer-sunset').html('');
-  //
-  //     document.getElementById('timer-sunset').innerHTML =
-  //       hours + ' hours ' + minutes + ' minutes and ' + seconds + ' seconds';
-  //     // If the count down is finished, write some text
-  //     if (distance < 1) {
-  //       //then get tomorrows sunrise
-  //
-  //       clearInterval(x);
-  //       $('#timer-sunset').html('');
-  //
-  //       document.getElementById('timer-sunset').innerHTML = 'Now';
-  //     }
-  //   }, 250);
-  //   // $('#js-select-sunset-header-button').fadeIn(3500);
-  //
-  //   // $('#sun-left').fadeIn(3500);
-  // }
 });
