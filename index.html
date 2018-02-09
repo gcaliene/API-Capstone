@@ -17,14 +17,17 @@
 
   <header class="header">
     <div class="header_content">
-
       <ul class="header_content_list">
-
-        <li class="header_content_list_item"><button id="js-select-sunset-header-button" class="pulse ">How about Sunset?
-</button></li>
-        <li class="header_content_list_item"><button id="js-select-sunrise-header-button" class="pulse hidden">Back to Sunrise?
-</button></li>
-
+        <li class="header_content_list_item">
+          <button id="js-select-sunset-header-button" class="pulse ">
+            How about Sunset?
+          </button>
+        </li>
+        <li class="header_content_list_item">
+          <button id="js-select-sunrise-header-button" class="pulse hidden">
+            Back to Sunrise?
+          </button>
+        </li>
       </ul>
     </div>
   </header>
@@ -32,12 +35,14 @@
     <video autoplay muted preload="auto" loop id="myVideo" poster="assets/Video-background.PNG">
       <source src="assets/Sunrise-2.mp4" type="video/mp4">
       Your browser does not support HTML5 video.
-  </video>
+    </video>
+
+    <div id="myVideo-overlay"></div>
 
   <div  class="main">
     <div class="main_content main_content--centering">
       <div id="sunrise-left" class="main_content_text hidden">
-<i class="fa fa-sun-o  fa-3x orange" aria-hidden="true"></i>
+      <i class="fa fa-sun-o  fa-3x orange" aria-hidden="true"></i>
         <h1 class="main_content_heading">Sunrise Countdown</h1>
         <div>Sunrise in <span id="city"></span> will be </br><span id="js-search-results"></span></div>
         <div class="main_content_text_js">
@@ -48,7 +53,7 @@
         </div>
         <br>
         <form id="date-input-sunrise" class="">
-          <label>Want to plan ahead? Pick a date below.</label>
+          <label>Want to plan ahead? Pick a date below.</label></br>
           <input id="date" type="date">
           <button class="pulse" type="submit" name="" value="Submit">GO!</button>
         </form>
@@ -75,7 +80,7 @@
         </div>
         <br>
         <form id="date-input-sunset">
-          <label>Want to plan ahead? Pick a date below.</label>
+          <label>Want to plan ahead? Pick a date below.</label></br>
           <input id="date-sunset" type="date">
           <button class="pulse" type="submit" name="" value="Submit">GO!</button>
         </form>
